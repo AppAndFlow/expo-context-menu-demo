@@ -6,7 +6,7 @@ import { routes } from './routes';
 const RootStack = createNativeStackNavigator();
 
 const AppNavigator = () => {
-  const initialRouteName = routes.WelcomeScreen.name;
+  const initialRouteName = routes.HomeScreen.name;
 
   return (
     <RootStack.Navigator

@@ -13,6 +13,8 @@ import { fontsMap } from '../constants/fonts';
 import { rootStore } from '../stores';
 import AppContent from './AppContent';
 
+import { ExpoContextMenuProvider } from '@appandflow/expo-context-menu';
+
 export const StoreContext = React.createContext<typeof rootStore>(rootStore);
 
 /**
@@ -41,11 +43,13 @@ const App = () => {
   return ready ? (
     <StoreContext.Provider value={rootStore}>
       <SafeAreaProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <NavigationContainer>
-            <AppContent />
-          </NavigationContainer>
-        </GestureHandlerRootView>
+        <ExpoContextMenuProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <NavigationContainer>
+              <AppContent />
+            </NavigationContainer>
+          </GestureHandlerRootView>
+        </ExpoContextMenuProvider>
       </SafeAreaProvider>
     </StoreContext.Provider>
   ) : (
