@@ -1,21 +1,40 @@
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  LayoutAnimation,
+  View,
+} from 'react-native';
 import DemoButton from './DemoButton';
 import images from '../../constants/images';
 import metrics from '../../constants/metrics';
 import { BlurView } from 'expo-blur';
+import Animated, {
+  LinearTransition,
+  ReduceMotion,
+  SequencedTransition,
+} from 'react-native-reanimated';
+import { range } from '../../utils/array';
 
-const mockedIcons = [
-  { label: 'Arizona', image: images.cardinalsIcon },
-  { label: 'Carolina', image: images.panthersIcon },
-  { label: 'Los Angeles', image: images.ramsIcon },
-  { label: 'Detroit', image: images.lionsIcon },
-  { label: 'Texas', image: images.titansIcon },
-];
+interface Icon {
+  label: string;
+  image: ImageSourcePropType;
+}
 
 const HomeScreen = () => {
+  const [icons, setIcons] = React.useState<Icon[]>([
+    { label: 'Arizona', image: images.cardinalsIcon },
+    { label: 'Carolina', image: images.panthersIcon },
+    { label: 'Los Angeles', image: images.ramsIcon },
+    { label: 'Detroit', image: images.lionsIcon },
+    { label: 'Texas', image: images.titansIcon },
+  ]);
+
+  const onPressDeleteIcon = ({ icon }: { icon: Icon }) => {
+    setIcons(icons.filter((i) => i.label !== icon.label));
+  };
   return (
-    <View
+    <Animated.View
       style={{
         flex: 1,
         position: 'relative',
@@ -39,24 +58,27 @@ const HomeScreen = () => {
         }}
       />
 
-      <View
+      <Animated.View
         style={{
           flexDirection: 'row',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
+
           flexWrap: 'wrap',
-          gap: 16,
+          rowGap: 16,
+          columnGap: 28,
         }}
       >
-        {mockedIcons.map((mockedIcon, i) => {
+        {icons.map((mockedIcon) => {
           return (
             <DemoButton
-              key={i}
+              key={mockedIcon.label}
               label={mockedIcon.label}
               image={mockedIcon.image}
+              onPressMenuItem={() => onPressDeleteIcon({ icon: mockedIcon })}
             />
           );
         })}
-      </View>
+      </Animated.View>
       <View
         style={{
           borderRadius: 30,
@@ -78,11 +100,11 @@ const HomeScreen = () => {
             gap: 36,
           }}
         >
-          <DemoButton image={images.safariIcon} />
-          <DemoButton image={images.messageIcon} />
+          <DemoButton image={images.safariIcon} onPressMenuItem={() => null} />
+          <DemoButton image={images.messageIcon} onPressMenuItem={() => null} />
         </BlurView>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

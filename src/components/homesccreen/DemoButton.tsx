@@ -3,6 +3,8 @@ import { Image, ImageSourcePropType, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextNormal } from '../common/typography';
 import Animated, {
+  LinearTransition,
+  SequencedTransition,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -83,12 +85,16 @@ const menuItemContent = [
   },
 ];
 
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+
 const DemoButton = ({
   label,
   image,
+  onPressMenuItem,
 }: {
   label?: string;
   image: ImageSourcePropType;
+  onPressMenuItem: () => void;
 }) => {
   const buttonScale = useSharedValue(1);
 
@@ -148,7 +154,11 @@ const DemoButton = ({
     );
   };
 
-  const menuToRender = () => {
+  const MenuToRender = ({
+    onPressMenuItem,
+  }: {
+    onPressMenuItem: () => void;
+  }) => {
     return (
       <View
         style={{
@@ -159,21 +169,25 @@ const DemoButton = ({
         {menuItemContent.map((menuItem, i) => {
           return (
             <CustomMenuItem
-              key={i}
+              key={`${i}`}
               label={menuItem.label}
               icon={menuItem.icon}
               redText={menuItem.redText}
               isLast={i === menuItemContent.length - 1}
+              onPressItem={onPressMenuItem}
             />
           );
         })}
       </View>
     );
   };
+
   return (
-    <Animated.View style={{ alignItems: 'center', position: 'relative' }}>
-      <ExpoContextMenu renderMenu={menuToRender}>
-        <TouchableOpacity
+    <Animated.View layout={LinearTransition} style={{ alignItems: 'center' }}>
+      <ExpoContextMenu
+        renderMenu={() => <MenuToRender onPressMenuItem={onPressMenuItem} />}
+      >
+        <AnimatedTouchable
           activeOpacity={1}
           onPressIn={onPressInButton}
           onPressOut={onPressOutButton}
@@ -189,10 +203,10 @@ const DemoButton = ({
               },
             ]}
           />
-        </TouchableOpacity>
+        </AnimatedTouchable>
       </ExpoContextMenu>
       {label && (
-        <TextNormal
+        <Animated.Text
           style={{
             fontSize: 12,
             fontWeight: '500',
@@ -202,7 +216,7 @@ const DemoButton = ({
           }}
         >
           {label}
-        </TextNormal>
+        </Animated.Text>
       )}
     </Animated.View>
   );
