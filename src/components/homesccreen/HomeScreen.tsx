@@ -1,20 +1,10 @@
 import * as React from 'react';
-import {
-  Image,
-  ImageSourcePropType,
-  LayoutAnimation,
-  View,
-} from 'react-native';
+import { Image, ImageSourcePropType, View } from 'react-native';
 import DemoButton from './DemoButton';
 import images from '../../constants/images';
 import metrics from '../../constants/metrics';
 import { BlurView } from 'expo-blur';
-import Animated, {
-  LinearTransition,
-  ReduceMotion,
-  SequencedTransition,
-} from 'react-native-reanimated';
-import { range } from '../../utils/array';
+import Animated from 'react-native-reanimated';
 
 interface Icon {
   label: string;
