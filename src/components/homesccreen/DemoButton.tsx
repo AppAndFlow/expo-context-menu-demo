@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ImageSourcePropType } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Animated, {
+  BounceOut,
   LinearTransition,
   useAnimatedStyle,
   useSharedValue,
@@ -39,7 +40,11 @@ const DemoButton = ({
   });
 
   return (
-    <Animated.View layout={LinearTransition} style={{ alignItems: 'center' }}>
+    <Animated.View
+      layout={LinearTransition.delay(300)}
+      exiting={BounceOut}
+      style={{ alignItems: 'center' }}
+    >
       <ExpoContextMenu
         renderMenu={() => <MenuToRender onPressMenuItem={onPressMenuItem} />}
       >
