@@ -13,11 +13,13 @@ interface Icon {
 
 const HomeScreen = () => {
   const [icons, setIcons] = React.useState<Icon[]>([
-    { label: 'Arizona', image: images.cardinalsIcon },
     { label: 'Carolina', image: images.panthersIcon },
+    { label: 'Arizona', image: images.cardinalsIcon },
     { label: 'Los Angeles', image: images.ramsIcon },
-    { label: 'Detroit', image: images.lionsIcon },
-    { label: 'Texas', image: images.titansIcon },
+    { label: 'New York', image: images.jetsIcon },
+    { label: 'Tennessee', image: images.titansIcon },
+    { label: 'Buffalo', image: images.billsIcon },
+    { label: 'Philadelphia', image: images.eaglesIcon },
   ]);
 
   const onPressDeleteIcon = ({ icon }: { icon: Icon }) => {
@@ -91,7 +93,10 @@ const HomeScreen = () => {
           }}
         >
           <DemoButton image={images.lionsIcon} onPressMenuItem={() => null} />
-          <DemoButton image={images.titansIcon} onPressMenuItem={() => null} />
+          <DemoButton
+            image={images.commandersIcon}
+            onPressMenuItem={() => null}
+          />
         </BlurView>
       </View>
     </Animated.View>

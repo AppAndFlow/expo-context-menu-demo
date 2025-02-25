@@ -5,6 +5,10 @@ const panthersIcon = require('./images/panthersIcon.png');
 const ramsIcon = require('./images/ramsIcon.png');
 const lionsIcon = require('./images/lionsIcon.png');
 const titansIcon = require('./images/titansIcon.png');
+const billsIcon = require('./images/billsIcon.png');
+const commandersIcon = require('./images/commandersIcon.png');
+const eaglesIcon = require('./images/eaglesIcon.png');
+const jetsIcon = require('./images/jetsIcon.png');
 
 const faceidIcon = require('./images/faceIdIcon.png');
 const widget1 = require('./images/widget1.png');
@@ -25,5 +29,9 @@ export default {
   widget1,
   widget2,
   widget3,
+  billsIcon,
+  commandersIcon,
+  eaglesIcon,
+  jetsIcon,
   // hamburgerButton,
 };
