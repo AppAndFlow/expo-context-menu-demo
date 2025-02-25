@@ -2,11 +2,12 @@ import * as React from 'react';
 import { ImageSourcePropType } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Animated, {
-  BounceOut,
+  Easing,
   LinearTransition,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  ZoomOut,
 } from 'react-native-reanimated';
 import { ExpoContextMenu } from '@appandflow/expo-context-menu';
 
@@ -26,7 +27,7 @@ const DemoButton = ({
   const buttonScale = useSharedValue(1);
 
   const onPressInButton = () => {
-    buttonScale.value = withSpring(1.3);
+    buttonScale.value = withSpring(1.1);
   };
 
   const onPressOutButton = () => {
@@ -42,7 +43,7 @@ const DemoButton = ({
   return (
     <Animated.View
       layout={LinearTransition.delay(300)}
-      exiting={BounceOut}
+      exiting={ZoomOut}
       style={{ alignItems: 'center' }}
     >
       <ExpoContextMenu

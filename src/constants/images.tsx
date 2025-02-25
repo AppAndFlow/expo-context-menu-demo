@@ -5,8 +5,7 @@ const panthersIcon = require('./images/panthersIcon.png');
 const ramsIcon = require('./images/ramsIcon.png');
 const lionsIcon = require('./images/lionsIcon.png');
 const titansIcon = require('./images/titansIcon.png');
-const safariIcon = require('./images/safariIcon.png');
-const messageIcon = require('./images/messageIcon.png');
+
 const faceidIcon = require('./images/faceIdIcon.png');
 const widget1 = require('./images/widget1.png');
 const widget2 = require('./images/widget2.png');
@@ -22,8 +21,6 @@ export default {
   ramsIcon,
   lionsIcon,
   titansIcon,
-  safariIcon,
-  messageIcon,
   faceidIcon,
   widget1,
   widget2,

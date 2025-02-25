@@ -90,8 +90,8 @@ const HomeScreen = () => {
             gap: 36,
           }}
         >
-          <DemoButton image={images.safariIcon} onPressMenuItem={() => null} />
-          <DemoButton image={images.messageIcon} onPressMenuItem={() => null} />
+          <DemoButton image={images.lionsIcon} onPressMenuItem={() => null} />
+          <DemoButton image={images.titansIcon} onPressMenuItem={() => null} />
         </BlurView>
       </View>
     </Animated.View>
