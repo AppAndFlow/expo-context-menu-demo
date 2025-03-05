@@ -12,7 +12,7 @@
     "lint": "npx eslint --ignore-path .gitignore './src/**/*.ts[x]' './*.js' --fix"
   },
   "dependencies": {
-    "@appandflow/expo-context-menu": "^0.1.16",
+    "@appandflow/expo-context-menu": "^0.1.17",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.5.0",
     "@react-navigation/stack": "^6.1.1",
