@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { ImageSourcePropType } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import Animated, {
-  Easing,
   LinearTransition,
   useAnimatedStyle,
   useSharedValue,
@@ -13,8 +12,6 @@ import { ExpoContextMenu } from '@appandflow/expo-context-menu';
 
 import MenuToRender from './MenuToRender';
 
-const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
-
 const DemoButton = ({
   label,
   image,
@@ -24,21 +21,15 @@ const DemoButton = ({
   image: ImageSourcePropType;
   onPressMenuItem: () => void;
 }) => {
-  const buttonScale = useSharedValue(1);
-
-  const onPressInButton = () => {
-    buttonScale.value = withSpring(1.1);
-  };
-
-  const onPressOutButton = () => {
-    buttonScale.value = withSpring(1);
-  };
+  const buttonScale = useSharedValue(0);
 
   const animatedButtonStyle = useAnimatedStyle(() => {
     return {
       transform: [{ scale: buttonScale.value }],
     };
   });
+
+  const itemScale = 1.2;
 
   return (
     <Animated.View
@@ -47,26 +38,14 @@ const DemoButton = ({
       style={{ alignItems: 'center' }}
     >
       <ExpoContextMenu
+        itemScaleOnMenuOpen={itemScale}
         renderMenu={() => <MenuToRender onPressMenuItem={onPressMenuItem} />}
       >
-        <AnimatedTouchable
-          activeOpacity={1}
-          onPressIn={onPressInButton}
-          onPressOut={onPressOutButton}
-        >
-          <Animated.Image
-            source={image}
-            style={[
-              animatedButtonStyle,
-              {
-                height: 60,
-                width: 60,
-                borderRadius: 10,
-              },
-            ]}
-          />
-        </AnimatedTouchable>
+        <Animated.View style={animatedButtonStyle}>
+          <Animated.Image source={image} style={{ height: 60, width: 60 }} />
+        </Animated.View>
       </ExpoContextMenu>
+
       {label && (
         <Animated.Text
           style={{
