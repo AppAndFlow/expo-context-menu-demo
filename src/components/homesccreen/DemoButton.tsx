@@ -21,7 +21,7 @@ const DemoButton = ({
   image: ImageSourcePropType;
   onPressMenuItem: () => void;
 }) => {
-  const buttonScale = useSharedValue(0);
+  const buttonScale = useSharedValue(1);
 
   const animatedButtonStyle = useAnimatedStyle(() => {
     return {
@@ -29,7 +29,13 @@ const DemoButton = ({
     };
   });
 
-  const itemScale = 1.2;
+  const onPressInButton = () => {
+    buttonScale.value = withSpring(1.2);
+  };
+
+  const onPressOutButton = () => {
+    buttonScale.value = withSpring(1);
+  };
 
   return (
     <Animated.View
@@ -37,22 +43,23 @@ const DemoButton = ({
       exiting={ZoomOut}
       style={{ alignItems: 'center' }}
     >
-      <ExpoContextMenu
-        itemScaleOnMenuOpen={itemScale}
-        renderMenu={() => <MenuToRender onPressMenuItem={onPressMenuItem} />}
-      >
-        <Animated.View style={animatedButtonStyle}>
+      <Animated.View style={animatedButtonStyle}>
+        <ExpoContextMenu
+          onMenuOpen={onPressInButton}
+          onMenuClose={onPressOutButton}
+          itemScaleOnMenuOpen={1.2}
+          renderMenu={() => <MenuToRender onPressMenuItem={onPressMenuItem} />}
+        >
           <Animated.Image source={image} style={{ height: 60, width: 60 }} />
-        </Animated.View>
-      </ExpoContextMenu>
-
+        </ExpoContextMenu>
+      </Animated.View>
       {label && (
         <Animated.Text
           style={{
             fontSize: 12,
             fontWeight: '500',
             textAlign: 'center',
-            paddingTop: 4,
+            marginTop: 4,
             color: 'white',
           }}
         >

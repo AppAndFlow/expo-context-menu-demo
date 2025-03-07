@@ -71,6 +71,7 @@ const HomeScreen = () => {
           );
         })}
       </Animated.View>
+
       <View
         style={{
           borderRadius: 30,
